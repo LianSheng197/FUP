@@ -1,0 +1,14 @@
+{
+  "name": "fup",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.user.js",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "keywords": [
+    "proxy"
+  ],
+  "author": "LianSheng",
+  "license": "MIT"
+}
