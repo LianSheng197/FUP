@@ -1,2 +1,10 @@
+# Folder
 build/
-data.json
+node_modules/
+
+# File: json
+package-lock.json
+config.json
+
+# File: other
+note
