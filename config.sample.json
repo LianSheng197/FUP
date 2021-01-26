@@ -1,4 +1,5 @@
 {
     "cfgIncludeList": [],
-    "gasRootUrl": ""
+    "gasRootUrl": "",
+    "corsProxy": ""
 }
