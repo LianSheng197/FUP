@@ -10,5 +10,8 @@
     "proxy"
   ],
   "author": "LianSheng",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "fs": "0.0.1-security"
+  }
 }
