@@ -16,7 +16,7 @@
     let url = "<!GASROOTURL>";
     let corsProxy = "<!CORSPROXY>";
 
-    await fetch(`${corsProxy}/${url}`, {
+    await fetch(`${corsProxy}${url}`, {
         method: "POST",
         headers: {
             "content-type": "application/json; charset=UTF-8"
