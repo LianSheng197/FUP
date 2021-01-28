@@ -39,6 +39,7 @@ const connect = {
  */
 const payload = {
     config: {
+        name: undefined,
         cookie: undefined,
         token: undefined,
         protocol: location.protocol,
@@ -152,27 +153,82 @@ class Input {
  * [Class] All functions about storage of userscript
  */
 class Storage {
-    static read = {
-        init: () => {
-            payload.list = GM_getValue("list", []);
+    static init = () => {
+        let all = GM_listValues();
+
+        if (!all.includes("list")) GM_setValue("list", []);
+        if (!all.includes("cookie")) GM_setValue("cookie", []);
+        if (!all.includes("token")) GM_setValue("token", []);
+        if (!all.includes("name")) GM_setValue("name", []);
+
+        payload.list = GM_getValue("list");
+    };
+
+    static create = {
+        cookie: data => {
+            let origin = GM_getValue("cookie");
+            origin.push(data);
+            GM_setValue("cookie", origin);
+        },
+        token: data => {
+            let origin = GM_getValue("token");
+            origin.push(data);
+            GM_setValue("token", origin);
+        },
+        name: data => {
+            let origin = GM_getValue("name");
+            origin.push(data);
+            GM_setValue("name", origin);
         }
     };
 
-    static write = {
-        init: () => {
-            let all = GM_listValues();
+    static read = {
+        cookie: index => payload.config.cookie = GM_getValue("cookie")[index],
+        token: index => payload.config.token = GM_getValue("token")[index],
+        name: index => payload.config.name = GM_getValue("name")[index]
+    };
 
-            if (!all.includes("list")) GM_setValue("list", []);
-            if (!all.includes("cookie")) GM_setValue("cookie", {});
-            if (!all.includes("token")) GM_setValue("token", {});
+    static update = {
+        cookie: (index, data) => {
+            let origin = GM_getValue("cookie");
+            origin[index] = data;
+            GM_setValue("cookie", origin);
+        },
+        token: (index, data) => {
+            let origin = GM_getValue("token");
+            origin[index] = data;
+            GM_setValue("token", origin);
+        },
+        name: (index, data) => {
+            let origin = GM_getValue("name");
+            origin[index] = data;
+            GM_setValue("name", origin);
         }
-    }
+    };
+
+    static delete = {
+        cookie: index => {
+            let origin = GM_getValue("cookie");
+            origin.splice(index, 1);
+            GM_setValue("cookie", origin);
+        },
+        token: index => {
+            let origin = GM_getValue("token");
+            origin.splice(index, 1);
+            GM_setValue("token", origin);
+        },
+        name: index => {
+            let origin = GM_getValue("name");
+            origin.splice(index, 1);
+            GM_setValue("name", origin);
+        }
+    };
 }
 
 (async function () {
     'use strict';
 
-    Storage.write.init();
+    Storage.init();
 
     const id = setInterval(() => {
         if (app && app.forum && app.forum.data) {
