@@ -10,12 +10,42 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
-const url = "<!GASROOTURL>";
-const corsProxy = "<!CORSPROXY>";
+/**
+ * [Public] Connection data
+ */
+const connect = {
+    apiUrl: "<!GASROOTURL>",
+    corsProxy: "<!CORSPROXY>"
+}
 
+/**
+ * [Public] All possible properties with config, data, and link.
+ */
+const payload = {
+    config: {
+        cookie: undefined,
+        token: undefined,
+        protocol: location.protocol,
+        host: location.host,
+        api: undefined
+    },
+    data: {
+        method: undefined,
+        title: undefined,
+        content: undefined,
+        tags: undefined,
+        did: undefined,
+        pid: undefined
+    },
+    list: []
+};
+
+/**
+ * [Class] All operations about forum.
+ */
 class Forum {
-    static newDiscussion = async payload => {
-        await fetch(`${corsProxy}${url}`, {
+    static newDiscussion = async () => {
+        await fetch(`${connect.corsProxy}${connect.apiUrl}`, {
             method: "POST",
             headers: {
                 "content-type": "application/json; charset=UTF-8"
@@ -39,38 +69,23 @@ class Forum {
     }
 }
 
+/**
+ * [Class] All input event
+ */
 class Input {
-    static configCookie = (payload, data) => payload.config.cookie = data;
-    static configToken = (payload, data) => payload.config.token = data;
+    static configCookie = changeData => payload.config.cookie = changeData;
+    static configToken = changeData => payload.config.token = changeData;
 }
 
 (async function () {
     'use strict';
-    const payload = {
-        config: {
-            cookie: undefined,
-            token: undefined,
-            protocol: location.protocol,
-            host: location.host,
-            api: undefined
-        },
-        data: {
-            method: undefined,
-            title: undefined,
-            content: undefined,
-            tags: undefined,
-            did: undefined,
-            pid: undefined
-        },
-        list: []
-    };
 
     const id = setInterval(() => {
         if (app && app.forum && app.forum.data) {
             payload.config.api = app.forum.data.attributes.apiUrl.split(`${payload.config.host}/`)[1];
 
             clearInterval(id);
-            console.log(payload);
+            console.log(connect, payload);
         }
     }, 100);
 })();
