@@ -51,7 +51,7 @@ class Input {
             cookie: undefined,
             token: undefined,
             protocol: location.protocol,
-            host: lcoation.host,
+            host: location.host,
             api: undefined
         },
         data: {
