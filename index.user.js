@@ -11,6 +11,21 @@
 // ==/UserScript==
 
 /**
+ * [Public] All types of operation
+ */
+const ops = {
+    discussion: {
+        new: "new_discussion",
+        title: "edit_title",
+        tags: "edit_tags"
+    },
+    post: {
+        new: "new_post",
+        edit: "edit_post"
+    }
+}
+
+/**
  * [Public] Connection data
  */
 const connect = {
