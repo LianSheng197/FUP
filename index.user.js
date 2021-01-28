@@ -91,9 +91,9 @@ class Forum {
 }
 
 /**
- * [Class] All responses
+ * [Class] All messages
  */
-class Response {
+class Message {
     static text = {
         discussion: {
             new: "<!TEXT_ERROR_DISCUSSON_NEW>",
@@ -235,7 +235,7 @@ class Storage {
             payload.config.api = app.forum.data.attributes.apiUrl.split(`${payload.config.host}/`)[1];
 
             clearInterval(id);
-            console.log(Response);
+            console.log(Message);
         }
     }, 100);
 })();
