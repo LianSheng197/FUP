@@ -60,27 +60,31 @@ const payload = {
  */
 class Forum {
     static newDiscussion = async () => {
-        await fetch(`${connect.corsProxy}${connect.apiUrl}`, {
-            method: "POST",
-            headers: {
-                "content-type": "application/json; charset=UTF-8"
-            },
-            body: JSON.stringify({
-                method: ops.discussion.new,
-                token: payload.config.token,
-                cookie: payload.config.cookie,
-                protocol: payload.config.protocol,
-                host: payload.config.host,
-                api: payload.config.api,
-                tags: payload.data.tags
-            })
-        }).then(
-            r => r.json()
-        ).then(
-            r => console.log(r)
-        ).catch(
-            e => console.log(`[ERROR] ${ops.discussion.new}`, e)
-        );
+        if (Validator.discussion.new()) {
+            await fetch(`${connect.corsProxy}${connect.apiUrl}`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify({
+                    method: ops.discussion.new,
+                    token: payload.config.token,
+                    cookie: payload.config.cookie,
+                    protocol: payload.config.protocol,
+                    host: payload.config.host,
+                    api: payload.config.api,
+                    tags: payload.data.tags
+                })
+            }).then(
+                r => r.json()
+            ).then(
+                r => console.log(r)
+            ).catch(
+                e => console.log(`[ERROR] ${ops.discussion.new}`, e)
+            );
+        } else {
+
+        }
     }
 }
 
@@ -97,7 +101,7 @@ class Validator {
     static data = {
         new: () => this.base() && payload.data.content && payload.data.did,
         edit: () => this.base() && payload.data.content && payload.data.pid
-    }    
+    }
 }
 
 /**
