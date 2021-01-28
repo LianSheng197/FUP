@@ -66,20 +66,20 @@ class Forum {
                 "content-type": "application/json; charset=UTF-8"
             },
             body: JSON.stringify({
-                method: "new_discussion",
-                token: "token",
-                cookie: "cookie",
-                protocol: "protocol",
-                host: "host.name",
-                api: "apiName",
-                tags: [26, 32]
+                method: ops.discussion.new,
+                token: payload.config.token,
+                cookie: payload.config.cookie,
+                protocol: payload.config.protocol,
+                host: payload.config.host,
+                api: payload.config.api,
+                tags: payload.data.tags
             })
         }).then(
             r => r.json()
         ).then(
             r => console.log(r)
         ).catch(
-            e => console.log("Error", e)
+            e => console.log(`[ERROR] ${ops.discussion.new}`, e)
         );
     }
 }
