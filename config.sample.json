@@ -1,5 +1,18 @@
 {
     "cfgIncludeList": [],
     "gasRootUrl": "",
-    "corsProxy": ""
+    "corsProxy": "",
+    "text": {
+        "error": {
+            "discussion": {
+                "new": "",
+                "title": "",
+                "tags": ""
+            },
+            "post": {
+                "new": "",
+                "edit": ""
+            }
+        }
+    }
 }

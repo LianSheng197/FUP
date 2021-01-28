@@ -23,9 +23,19 @@ fs.readFile(target, 'utf8', (err, data) => {
     let includes = "";
     config.cfgIncludeList.forEach(each => includes += `\n// @include      ${each}`);
 
+    // Includes
     let result = data.replace(/\n\/\/\ *<!INCLUDES>/, includes);
+
+    // Connect
     result = result.replace("<!GASROOTURL>", config.gasRootUrl);
     result = result.replace("<!CORSPROXY>", config.corsProxy);
+
+    // Text
+    result = result.replace("<!TEXT_ERROR_DISCUSSON_NEW>", config.text.error.discussion.new);
+    result = result.replace("<!TEXT_ERROR_DISCUSSON_TITLE>", config.text.error.discussion.title);
+    result = result.replace("<!TEXT_ERROR_DISCUSSON_TAGS>", config.text.error.discussion.tags);
+    result = result.replace("<!TEXT_ERROR_POST_NEW>", config.text.error.post.new);
+    result = result.replace("<!TEXT_ERROR_POST_EDIT>", config.text.error.post.edit);
 
     fs.writeFile(target, result, 'utf8', err => {
         if (err) return console.log(err);

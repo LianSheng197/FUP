@@ -88,6 +88,32 @@ class Forum {
     }
 }
 
+class Response {
+    static text = {
+        discussion: {
+            new: "<!TEXT_ERROR_DISCUSSON_NEW>",
+            title: "<!TEXT_ERROR_DISCUSSON_TITLE>",
+            tags: "<!TEXT_ERROR_DISCUSSON_TAGS>"
+        },
+        post: {
+            new: "<!TEXT_ERROR_POST_NEW>",
+            edit: "<!TEXT_ERROR_POST_EDIT>"
+        }
+    }
+    static translate = (format, replacement) => format.replace("%s", replacement);
+    static error = {
+        discussion: {
+            new: () => this.text.discussion.new,
+            title: () => this.translate(this.text.discussion.title, payload.data.did),
+            tags: () => this.translate(this.text.discussion.tags, payload.data.did)
+        },
+        post: {
+            new: () => this.translate(this.text.post.new, payload.data.did),
+            edit: () => this.translate(this.text.post.edit, payload.data.pid)
+        }
+    }
+}
+
 /**
  * [Class] All properties checker
  */
