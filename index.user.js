@@ -225,13 +225,22 @@ class Storage {
     };
 }
 
+/**
+ * [Class] dom function
+ */
+class DOM {
+    static exist = (root, selector) => root.querySelectorAll(selector).length > 0;
+    static find = (root, selector) => root.querySelector(selector);
+    static finds = (root, selector) => root.querySelectorAll(selector);
+}
+
 (async function () {
     'use strict';
 
     Storage.init();
 
     const id = setInterval(() => {
-        if (app && app.forum && app.forum.data) {
+        if (app && app.forum && app.forum.data && DOM.exist(document, "#app")) {
             payload.config.api = app.forum.data.attributes.apiUrl.split(`${payload.config.host}/`)[1];
 
             clearInterval(id);
