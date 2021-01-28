@@ -7,6 +7,7 @@
 // <!INCLUDES>
 // @grant        GM_setValue
 // @grant        GM_getValue
+// @grant        GM_listValues
 // @grant        GM_addStyle
 // ==/UserScript==
 
@@ -34,7 +35,7 @@ const connect = {
 }
 
 /**
- * [Public] All possible properties with config, data, and link.
+ * [Public] All possible properties with config, data, and list.
  */
 const payload = {
     config: {
@@ -102,7 +103,7 @@ class Response {
             new: "<!TEXT_ERROR_POST_NEW>",
             edit: "<!TEXT_ERROR_POST_EDIT>"
         }
-    }
+    };
     static translate = (format, replacement) => format.replace("%s", replacement);
     static error = {
         discussion: {
@@ -114,7 +115,7 @@ class Response {
             new: () => this.translate(this.text.post.new, payload.data.did),
             edit: () => this.translate(this.text.post.edit, payload.data.pid)
         }
-    }
+    };
 }
 
 /**
@@ -147,15 +148,38 @@ class Input {
     static dataPostId = changeData => payload.data.pid = changeData;
 }
 
+/**
+ * [Class] All functions about storage of userscript
+ */
+class Storage {
+    static read = {
+        init: () => {
+            payload.list = GM_getValue("list", []);
+        }
+    };
+
+    static write = {
+        init: () => {
+            let all = GM_listValues();
+
+            if (!all.includes("list")) GM_setValue("list", []);
+            if (!all.includes("cookie")) GM_setValue("cookie", {});
+            if (!all.includes("token")) GM_setValue("token", {});
+        }
+    }
+}
+
 (async function () {
     'use strict';
+
+    Storage.write.init();
 
     const id = setInterval(() => {
         if (app && app.forum && app.forum.data) {
             payload.config.api = app.forum.data.attributes.apiUrl.split(`${payload.config.host}/`)[1];
 
             clearInterval(id);
-            console.log(connect, payload);
+            console.log(Response);
         }
     }, 100);
 })();
