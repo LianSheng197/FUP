@@ -85,6 +85,22 @@ class Forum {
 }
 
 /**
+ * [Class] All properties checker
+ */
+class Validator {
+    static base = () => payload.config.cookie && payload.config.token && payload.data.method;
+    static discussion = {
+        new: () => this.base() && payload.data.title && payload.data.content,
+        title: () => this.base() && payload.data.title && payload.data.did,
+        tags: () => this.base() && payload.data.tags && payload.data.did
+    }
+    static data = {
+        new: () => this.base() && payload.data.content && payload.data.did,
+        edit: () => this.base() && payload.data.content && payload.data.pid
+    }    
+}
+
+/**
  * [Class] All input event
  */
 class Input {
