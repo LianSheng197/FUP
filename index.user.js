@@ -90,6 +90,12 @@ class Forum {
 class Input {
     static configCookie = changeData => payload.config.cookie = changeData;
     static configToken = changeData => payload.config.token = changeData;
+    static dataMethod = changeData => payload.data.method = changeData;
+    static dataTitle = changeData => payload.data.title = changeData;
+    static dataContent = changeData => payload.data.content = changeData;
+    static dataTags = changeData => payload.data.tags = changeData;
+    static dataDiscussionId = changeData => payload.data.did = changeData;
+    static dataPostId = changeData => payload.data.pid = changeData;
 }
 
 (async function () {
