@@ -31,13 +31,13 @@ fs.readFile(target, 'utf8', (err, data) => {
         if (err) return console.log(err);
     });
 
-    let result4test = "var fetch = require('node-fetch');\n";
-    result4test += result.replace(/\n?(?<!:)\/\/.+/g, "");
-    result4test = result4test.replace(/(headers:\ \{)/g, `$1\n"origin": "",\n"x-requested-with": "",`);
+    // let result4test = "var fetch = require('node-fetch');\n";
+    // result4test += result.replace(/\n?(?<!:)\/\/.+/g, "");
+    // result4test = result4test.replace(/(headers:\ \{)/g, `$1\n"origin": "",\n"x-requested-with": "",`);
 
-    fs.writeFile(target4test, result4test, 'utf8', err => {
-        if (err) return console.log(err);
-    });
+    // fs.writeFile(target4test, result4test, 'utf8', err => {
+    //     if (err) return console.log(err);
+    // });
 });
 
 console.log("Completed!");
