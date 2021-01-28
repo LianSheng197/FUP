@@ -229,9 +229,17 @@ class Storage {
  * [Class] dom function
  */
 class DOM {
+    static position = [
+        "beforebegin",
+        "afterbegin",
+        "beforeend",
+        "afterend"
+    ];
     static exist = (root, selector) => root.querySelectorAll(selector).length > 0;
     static find = (root, selector) => root.querySelector(selector);
     static finds = (root, selector) => root.querySelectorAll(selector);
+    static addHTML = (target, position_id, html) => target.insertAdjacentHTML(this.position[position_id], html);
+    static addElement = (target, position_id, element) => target.insertAdjacentElement(this.position[position_id], element);
 }
 
 (async function () {
@@ -244,7 +252,7 @@ class DOM {
             payload.config.api = app.forum.data.attributes.apiUrl.split(`${payload.config.host}/`)[1];
 
             clearInterval(id);
-            console.log(Message);
+            console.log(payload);
         }
     }, 100);
 })();
