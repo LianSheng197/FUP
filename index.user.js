@@ -88,6 +88,9 @@ class Forum {
     }
 }
 
+/**
+ * [Class] All responses
+ */
 class Response {
     static text = {
         discussion: {
