@@ -246,8 +246,11 @@ class DOM {
     'use strict';
 
     const css = `
-        #FUP_root { z-index: 999999; position: fixed; width: 400px; height: 200px; border: 1px solid #ccc; border-radius: 8px; background-color: #fffc; color: #444; overflow-x: hidden; overflow-y: auto; padding: 8px;}
-        #FUP_root td { padding: 4px; }
+        #FUP_root { z-index: 999999; position: fixed; top: 60px; right: 0px; width: 400px; height: 300px; border: 1px solid #333; border-radius: 8px; background-color: #fffc; overflow-x: hidden; overflow-y: auto;}
+        #FUP_mainHead { width: 400px; height: 20px; background-color: #333; color: #ccc; text-align: center;}
+        #FUP_mainBody { padding: 8px; user-select: none; color: #444;}
+        #FUP_mainBody td { padding: 4px;}
+        #FUP_mainMessage { text-align: right; color: #a00; font-weight: bold;}
     `;
     GM_addStyle(css);
 
@@ -261,38 +264,41 @@ class DOM {
             const html = `
             <div id="FUP_root">
                 <div id="FUP_main">
-                    <table>
-                        <tr>
-                            <td>Config</td>
-                            <td>
-                                <button id="FUP_mainModify">Modify</button>
-                                <button id="FUP_mainHidden">Hidden</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Method</td>
-                            <td><select id="FUP_mainMethod"></select></td>
-                        </tr>
-                        <tr>
-                            <td>User</td>
-                            <td><select id="FUP_mainUser"></select></td>
-                        </tr>
-                        <tr>
-                            <td>Title</td>
-                            <td><input id="FUP_mainTitle" type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Content</td>
-                            <td><textarea id="FUP_mainContent"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td id="FUP_mainMessage" colspan="2"></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><button id="FUP_mainSubmit">Submit</button></td>
-                        </tr>
-                    </table>
+                    <div id="FUP_mainHead"></div>
+                    <div id="FUP_mainBody">
+                        <table>
+                            <tr>
+                                <td>Config</td>
+                                <td>
+                                    <button id="FUP_mainModify">Modify</button>
+                                    <button id="FUP_mainHidden">Hidden</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Method</td>
+                                <td><select id="FUP_mainMethod"></select></td>
+                            </tr>
+                            <tr>
+                                <td>User</td>
+                                <td><select id="FUP_mainUser"></select></td>
+                            </tr>
+                            <tr>
+                                <td>Title</td>
+                                <td><input id="FUP_mainTitle" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>Content</td>
+                                <td><textarea id="FUP_mainContent"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td id="FUP_mainMessage" colspan="2">.</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><button id="FUP_mainSubmit">Submit</button></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
             `;
