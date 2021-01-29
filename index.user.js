@@ -284,8 +284,8 @@ class Drag {
     const css = `
         #FUP_root {}
         
-        #FUP_main { z-index: 999999; position: fixed; top: 60px; left: calc(100vw - 400px - 20px); width: 400px; height: 300px; border: 1px solid #333; border-radius: 8px; background-color: #fffc; overflow-x: hidden; overflow-y: auto; }
-        #FUP_mainHead { width: 400px; height: 20px; background-color: #333; color: #ccc; text-align: center;}
+        #FUP_main { z-index: 999999; position: fixed; top: 60px; left: calc(100vw - 400px - 20px); width: 400px; height: 300px; border: 1px solid #333; border-radius: 8px; background-color: #fffc;}
+        #FUP_mainHead { width: 402px; height: 24px; border: 1px solid #333; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: #333; color: #ccc; text-align: center; margin-top: -1px; margin-left: -2px;}
         #FUP_mainBody { padding: 8px; user-select: none; color: #444;}
         #FUP_mainBody td { padding: 4px;}
         #FUP_mainMessage { text-align: right; color: #a00; font-weight: bold;}
