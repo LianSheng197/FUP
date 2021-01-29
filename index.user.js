@@ -245,11 +245,30 @@ class DOM {
 (async function () {
     'use strict';
 
-    Storage.init();
+    const css = `
+        #FUP_root { z-index: 999999; position: fixed; width: 200px; height: 200px; border: 1px solid #ccc; border-radius: 8px; background-color: #0008; color: #000; overflow-x: hidden; overflow-y: auto; padding: 8px;}
+    `;
+    GM_addStyle(css);
 
+    Storage.init();
+    
     const id = setInterval(() => {
         if (app && app.forum && app.forum.data && DOM.exist(document, "#app")) {
             payload.config.api = app.forum.data.attributes.apiUrl.split(`${payload.config.host}/`)[1];
+
+            const root = DOM.find(document, "#app");
+            const html = `
+            <div id="FUP_root">
+                <div id="FUP_main">
+                    <select id="FUP_mainMethod"></select>
+                    <select id="FUP_mainUser"></select>
+                    <input id="FUP_mainTitle" type="text">
+                    <textarea id="FUP_mainContent"></textarea>
+                </div>
+            </div>
+            `;
+
+            DOM.addHTML(root, 1, html);
 
             clearInterval(id);
             console.log(payload);
