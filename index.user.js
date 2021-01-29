@@ -284,11 +284,16 @@ class Drag {
     const css = `
         #FUP_root {}
         
-        #FUP_main { z-index: 999999; position: fixed; top: 60px; left: calc(100vw - 400px - 20px); width: 400px; height: 300px; border: 1px solid #333; border-radius: 8px; background-color: #fffc;}
-        #FUP_mainHead { width: 402px; height: 24px; border: 1px solid #333; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: #333; color: #ccc; text-align: center; margin-top: -1px; margin-left: -2px;}
+        #FUP_main { z-index: 999999; position: fixed; top: 60px; left: calc(100vw - 400px - 20px); width: fit-content; height: fit-content; border: 1px solid #333; border-radius: 8px; background-color: #fffc; box-shadow: 6px 6px 4px #0003; }
+        #FUP_mainHead { width: calc(100% + 2px); height: 24px; border: 1px solid #333; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: #333; color: #ccc; margin-top: -1px; margin-left: -1px;}
         #FUP_mainBody { padding: 8px; user-select: none; color: #444;}
         #FUP_mainBody td { padding: 4px;}
-        #FUP_mainMessage { text-align: right; color: #a00; font-weight: bold;}
+        #FUP_mainMessage {  color: #a00; font-weight: bold;}
+        #FUP_mainHidden { width: 16px; height: 16px; margin-top: 4px; margin-right: 8px; border-radius: 50%; background-color: #a00; cursor: pointer; }
+        #FUP_mainHidden:hover { background-color: #d00; }
+
+        .FUP_left { text-align: left; }
+        .FUP_right { text-align: right; }
     `;
     GM_addStyle(css);
 
@@ -302,16 +307,9 @@ class Drag {
             const html = `
             <div id="FUP_root">
                 <div id="FUP_main">
-                    <div id="FUP_mainHead"></div>
+                    <div id="FUP_mainHead" class="FUP_right"><button id="FUP_mainHidden"></button></div>
                     <div id="FUP_mainBody">
                         <table>
-                            <tr>
-                                <td>Config</td>
-                                <td>
-                                    <button id="FUP_mainModify">Modify</button>
-                                    <button id="FUP_mainHidden">Hidden</button>
-                                </td>
-                            </tr>
                             <tr>
                                 <td>Method</td>
                                 <td><select id="FUP_mainMethod"></select></td>
@@ -329,11 +327,11 @@ class Drag {
                                 <td><textarea id="FUP_mainContent"></textarea></td>
                             </tr>
                             <tr>
-                                <td id="FUP_mainMessage" colspan="2">.</td>
+                                <td id="FUP_mainMessage" class="FUP_right" colspan="2">.</td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td><button id="FUP_mainSubmit">Submit</button></td>
+                                <td class="FUP_left"><button id="FUP_mainModify">Config</button></td>
+                                <td class="FUP_right"><button id="FUP_mainSubmit">Submit</button></td>
                             </tr>
                         </table>
                     </div>
