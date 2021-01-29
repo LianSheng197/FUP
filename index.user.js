@@ -129,7 +129,7 @@ class Validator {
         title: () => this.base() && payload.data.title && payload.data.did,
         tags: () => this.base() && payload.data.tags && payload.data.did
     }
-    static data = {
+    static post = {
         new: () => this.base() && payload.data.content && payload.data.did,
         edit: () => this.base() && payload.data.content && payload.data.pid
     }
