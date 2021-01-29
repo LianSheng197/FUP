@@ -246,12 +246,13 @@ class DOM {
     'use strict';
 
     const css = `
-        #FUP_root { z-index: 999999; position: fixed; width: 200px; height: 200px; border: 1px solid #ccc; border-radius: 8px; background-color: #0008; color: #000; overflow-x: hidden; overflow-y: auto; padding: 8px;}
+        #FUP_root { z-index: 999999; position: fixed; width: 400px; height: 200px; border: 1px solid #ccc; border-radius: 8px; background-color: #fffc; color: #444; overflow-x: hidden; overflow-y: auto; padding: 8px;}
+        #FUP_root td { padding: 4px; }
     `;
     GM_addStyle(css);
 
     Storage.init();
-    
+
     const id = setInterval(() => {
         if (app && app.forum && app.forum.data && DOM.exist(document, "#app")) {
             payload.config.api = app.forum.data.attributes.apiUrl.split(`${payload.config.host}/`)[1];
@@ -260,10 +261,38 @@ class DOM {
             const html = `
             <div id="FUP_root">
                 <div id="FUP_main">
-                    <select id="FUP_mainMethod"></select>
-                    <select id="FUP_mainUser"></select>
-                    <input id="FUP_mainTitle" type="text">
-                    <textarea id="FUP_mainContent"></textarea>
+                    <table>
+                        <tr>
+                            <td>Config</td>
+                            <td>
+                                <button id="FUP_mainModify">Modify</button>
+                                <button id="FUP_mainHidden">Hidden</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Method</td>
+                            <td><select id="FUP_mainMethod"></select></td>
+                        </tr>
+                        <tr>
+                            <td>User</td>
+                            <td><select id="FUP_mainUser"></select></td>
+                        </tr>
+                        <tr>
+                            <td>Title</td>
+                            <td><input id="FUP_mainTitle" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>Content</td>
+                            <td><textarea id="FUP_mainContent"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td id="FUP_mainMessage" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><button id="FUP_mainSubmit">Submit</button></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             `;
