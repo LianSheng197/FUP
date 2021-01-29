@@ -94,6 +94,8 @@ class Forum {
  * [Class] All messages
  */
 class Message {
+    static translate = (format, replacement) => format.replace("%s", replacement);
+
     static text = {
         discussion: {
             new: "<!TEXT_ERROR_DISCUSSON_NEW>",
@@ -103,9 +105,11 @@ class Message {
         post: {
             new: "<!TEXT_ERROR_POST_NEW>",
             edit: "<!TEXT_ERROR_POST_EDIT>"
+        },
+        general: {
+            invalid: "<!TEXT_WARNING_GENERAL_INVALID>"
         }
     };
-    static translate = (format, replacement) => format.replace("%s", replacement);
     static error = {
         discussion: {
             new: () => this.text.discussion.new,
@@ -123,6 +127,7 @@ class Message {
  * [Class] All properties checker
  */
 class Validator {
+    static warning = () => Message.text.general.invalid;
     static base = () => payload.config.cookie && payload.config.token && payload.data.method;
     static discussion = {
         new: () => this.base() && payload.data.title && payload.data.content,
@@ -139,6 +144,41 @@ class Validator {
  * [Class] All input event
  */
 class Input {
+    static init = () => {
+        let root = DOM.find(document, "#FUP_root");
+
+        let components = {
+            main: {
+                method: DOM.find(root, "#FUP_mainMethod"),
+                user: DOM.find(root, "#FUP_mainUser"),
+                tags: DOM.find(root, "#FUP_mainTags"),
+                title: DOM.find(root, "#FUP_mainTitle"),
+                content: DOM.find(root, "#FUP_mainContent"),
+                submit: DOM.find(root, "#FUP_mainSubmit"),
+                config: DOM.find(root, "#FUP_mainModify"),
+                hidden: DOM.find(root, "#FUP_mainHidden")
+            }
+        };
+
+        this.initMethodList(components.main.method);
+    };
+
+    static initMethodList = target => {
+        let temp = "";
+        Object.entries(ops).forEach(([group, methods]) => {
+            let options = "";
+            Object.values(methods).forEach(method => {
+                options += `<option value="${method}">${method}</option>`;
+            });
+
+            console.log(options);
+            temp += `<optgroup label="${group}">${options}</optgroup>`;
+        });
+
+        target.innerHTML = temp;
+        console.log("init method list ok")
+    }
+
     static configCookie = changeData => payload.config.cookie = changeData;
     static configToken = changeData => payload.config.token = changeData;
     static dataMethod = changeData => payload.data.method = changeData;
@@ -319,6 +359,10 @@ class Drag {
                                 <td><select id="FUP_mainUser"></select></td>
                             </tr>
                             <tr>
+                                <td>Tags</td>
+                                <td><select id="FUP_mainTags" multiple></select></td>
+                            </tr>
+                            <tr>
                                 <td>Title</td>
                                 <td><input id="FUP_mainTitle" type="text"></td>
                             </tr>
@@ -343,6 +387,7 @@ class Drag {
             let main = DOM.find(root, "#FUP_main");
             console.log(main)
             Drag.register(main);
+            Input.init();
 
             clearInterval(id);
             console.log(payload);
