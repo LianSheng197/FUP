@@ -36,6 +36,7 @@ fs.readFile(target, 'utf8', (err, data) => {
     result = result.replace("<!TEXT_ERROR_DISCUSSON_TAGS>", config.text.error.discussion.tags);
     result = result.replace("<!TEXT_ERROR_POST_NEW>", config.text.error.post.new);
     result = result.replace("<!TEXT_ERROR_POST_EDIT>", config.text.error.post.edit);
+    result = result.replace("<!TEXT_WARNING_GENERAL_INVALID>", config.text.warning.general.invalid);
 
     fs.writeFile(target, result, 'utf8', err => {
         if (err) return console.log(err);

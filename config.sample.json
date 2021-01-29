@@ -13,6 +13,11 @@
                 "new": "",
                 "edit": ""
             }
+        },
+        "warning": {
+            "general": {
+                "invalid": ""
+            }
         }
     }
 }
