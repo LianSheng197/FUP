@@ -242,11 +242,49 @@ class DOM {
     static addElement = (target, position_id, element) => target.insertAdjacentElement(this.position[position_id], element);
 }
 
+class Drag {
+    static register(element) {
+        let pos1 = 0,
+            pos2 = 0,
+            pos3 = 0,
+            pos4 = 0;
+
+        let head = DOM.find(element, `#${element.id}Head`);
+        head.onmousedown = e => dragMouseDown(e);
+
+        function dragMouseDown(e) {
+            e.preventDefault();
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = e => dragMouseUp(e);
+            document.onmousemove = e => elementDrag(e);
+        }
+
+        function elementDrag(e) {
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            element.style.top = (element.offsetTop - pos2) + "px";
+            element.style.left = (element.offsetLeft - pos1) + "px";
+        }
+
+        function dragMouseUp() {
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+    }
+
+}
+
 (async function () {
     'use strict';
 
     const css = `
-        #FUP_root { z-index: 999999; position: fixed; top: 60px; right: 0px; width: 400px; height: 300px; border: 1px solid #333; border-radius: 8px; background-color: #fffc; overflow-x: hidden; overflow-y: auto;}
+        #FUP_root {}
+        
+        #FUP_main { z-index: 999999; position: fixed; top: 60px; left: calc(100vw - 400px - 20px); width: 400px; height: 300px; border: 1px solid #333; border-radius: 8px; background-color: #fffc; overflow-x: hidden; overflow-y: auto; }
         #FUP_mainHead { width: 400px; height: 20px; background-color: #333; color: #ccc; text-align: center;}
         #FUP_mainBody { padding: 8px; user-select: none; color: #444;}
         #FUP_mainBody td { padding: 4px;}
@@ -304,6 +342,9 @@ class DOM {
             `;
 
             DOM.addHTML(root, 1, html);
+            let main = DOM.find(root, "#FUP_main");
+            console.log(main)
+            Drag.register(main);
 
             clearInterval(id);
             console.log(payload);
