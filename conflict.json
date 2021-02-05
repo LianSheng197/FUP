@@ -1,5 +1,6 @@
 {
-    "conflicts": [
+    "conflicts": [],
+    "fixed": [
         {
             "id": 392928,
             "description": "textarea"

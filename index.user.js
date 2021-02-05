@@ -336,6 +336,8 @@ class Drag {
 
         .FUP_left { text-align: left; }
         .FUP_right { text-align: right; }
+
+        custom-textarea { -moz-appearance: textfield-multiline; -webkit-appearance: textarea; border: 1px solid gray; font: medium -moz-fixed; font: -webkit-small-control; height: 28px; overflow: auto; padding: 2px; resize: both; width: 200px; display: block; background-color: white; }
     `;
     GM_addStyle(css);
 
@@ -370,7 +372,7 @@ class Drag {
                             </tr>
                             <tr>
                                 <td>Content</td>
-                                <td><textarea id="FUP_mainContent"></textarea></td>
+                                <td><custom-textarea id="FUP_mainContent" contenteditable></custom-textarea></td>
                             </tr>
                             <tr>
                                 <td id="FUP_mainMessage" class="FUP_right" colspan="2">.</td>
