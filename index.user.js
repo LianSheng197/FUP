@@ -282,6 +282,9 @@ class DOM {
     static addElement = (target, position_id, element) => target.insertAdjacentElement(this.position[position_id], element);
 }
 
+/**
+ * [Class] Draggable window
+ */
 class Drag {
     static register(element) {
         let pos1 = 0,
@@ -315,7 +318,6 @@ class Drag {
             document.onmousemove = null;
         }
     }
-
 }
 
 (async function () {
