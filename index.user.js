@@ -61,7 +61,7 @@ const payload = {
  * [Class] All operations about forum.
  */
 class Forum {
-    static newDiscussion = async () => {
+    static newDiscussion = async() => {
         if (Validator.discussion.new()) {
             await fetch(`${connect.corsProxy}${connect.apiUrl}`, {
                 method: "POST",
@@ -75,7 +75,9 @@ class Forum {
                     protocol: payload.config.protocol,
                     host: payload.config.host,
                     api: payload.config.api,
-                    tags: payload.data.tags
+                    tags: payload.data.tags,
+                    title: undefined,
+                    content: undefined
                 })
             }).then(
                 r => r.json()
@@ -87,6 +89,47 @@ class Forum {
         } else {
 
         }
+    }
+
+    static editTitle = async() => {
+        if (Validator.discussion.title()) {
+            await fetch(`${connect.corsProxy}${connect.apiUrl}`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify({
+                    method: ops.discussion.title,
+                    token: payload.config.token,
+                    cookie: payload.config.cookie,
+                    protocol: payload.config.protocol,
+                    host: payload.config.host,
+                    api: payload.config.api,
+                    tags: payload.data.tags, 
+                    did: undefined
+                })
+            }).then(
+                r => r.json()
+            ).then(
+                r => console.log(r)
+            ).catch(
+                e => console.log(`[ERROR] ${ops.discussion.title}`, e)
+            );
+        } else {
+
+        }
+    }
+
+    static editTags = async() => {
+
+    }
+
+    static newPost = async() => {
+
+    }
+
+    static editPost = async() => {
+
     }
 }
 
@@ -320,7 +363,7 @@ class Drag {
     }
 }
 
-(async function () {
+(async function() {
     'use strict';
 
     const css = `
