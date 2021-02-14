@@ -192,7 +192,7 @@ class Input {
 /**
  * [Class] All functions about storage of userscript
  */
-class Storage {
+class DataStorage {
     static init = () => {
         let all = GM_listValues();
 
@@ -341,7 +341,7 @@ class Drag {
     `;
     GM_addStyle(css);
 
-    Storage.init();
+    DataStorage.init();
 
     const id = setInterval(() => {
         if (app && app.forum && app.forum.data && DOM.exist(document, "#app")) {
