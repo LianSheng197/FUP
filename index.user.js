@@ -76,8 +76,8 @@ class Forum {
                     host: payload.config.host,
                     api: payload.config.api,
                     tags: payload.data.tags,
-                    title: undefined,
-                    content: undefined
+                    title: payload.data.title,
+                    content: payload.data.content
                 })
             }).then(
                 r => r.json()
@@ -106,7 +106,7 @@ class Forum {
                     host: payload.config.host,
                     api: payload.config.api,
                     tags: payload.data.tags, 
-                    did: undefined
+                    did: payload.data.did
                 })
             }).then(
                 r => r.json()
