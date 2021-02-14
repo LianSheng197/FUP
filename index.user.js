@@ -105,7 +105,7 @@ class Forum {
                     protocol: payload.config.protocol,
                     host: payload.config.host,
                     api: payload.config.api,
-                    tags: payload.data.tags, 
+                    title: payload.data.title, 
                     did: payload.data.did
                 })
             }).then(
@@ -121,15 +121,90 @@ class Forum {
     }
 
     static editTags = async() => {
+        if (Validator.discussion.tags()) {
+            await fetch(`${connect.corsProxy}${connect.apiUrl}`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify({
+                    method: ops.discussion.title,
+                    token: payload.config.token,
+                    cookie: payload.config.cookie,
+                    protocol: payload.config.protocol,
+                    host: payload.config.host,
+                    api: payload.config.api,
+                    tags: payload.data.tags, 
+                    did: payload.data.did
+                })
+            }).then(
+                r => r.json()
+            ).then(
+                r => console.log(r)
+            ).catch(
+                e => console.log(`[ERROR] ${ops.discussion.title}`, e)
+            );
+        } else {
 
+        }
     }
 
     static newPost = async() => {
+        if (Validator.post.new()) {
+            await fetch(`${connect.corsProxy}${connect.apiUrl}`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify({
+                    method: ops.discussion.title,
+                    token: payload.config.token,
+                    cookie: payload.config.cookie,
+                    protocol: payload.config.protocol,
+                    host: payload.config.host,
+                    api: payload.config.api,
+                    did: payload.data.did,
+                    content: payload.data.content
+                })
+            }).then(
+                r => r.json()
+            ).then(
+                r => console.log(r)
+            ).catch(
+                e => console.log(`[ERROR] ${ops.discussion.title}`, e)
+            );
+        } else {
 
+        }
     }
 
     static editPost = async() => {
+        if (Validator.post.edit()) {
+            await fetch(`${connect.corsProxy}${connect.apiUrl}`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify({
+                    method: ops.discussion.title,
+                    token: payload.config.token,
+                    cookie: payload.config.cookie,
+                    protocol: payload.config.protocol,
+                    host: payload.config.host,
+                    api: payload.config.api,
+                    pid: payload.data.did,
+                    content: payload.data.content
+                })
+            }).then(
+                r => r.json()
+            ).then(
+                r => console.log(r)
+            ).catch(
+                e => console.log(`[ERROR] ${ops.discussion.title}`, e)
+            );
+        } else {
 
+        }
     }
 }
 
